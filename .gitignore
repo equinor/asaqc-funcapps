@@ -1,0 +1,7 @@
+bin
+obj
+.idea
+.vs
+/Asaqc/Asaqc.FuncApps/local.settings.json
+/Asaqc/Asaqc.FuncApps/Properties/serviceDependencies.local.json.user
+/Asaqc/Asaqc.FuncApps/Properties/serviceDependencies.local.json
