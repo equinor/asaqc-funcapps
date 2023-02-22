@@ -1,0 +1,37 @@
+name: function app
+on:
+  repository_dispatch:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+env:
+  ciTag: ${{ secrets.ACR_URL }}/function-app/ci
+  prodTag: ${{ secrets.ACR_URL }}/function-app/prod
+  acr: ${{ secrets.ACR_URL }}/
+
+jobs:
+  ### CI stage. ###
+  dockerbuild:
+    runs-on: ubuntu-latest
+    env:
+      environment: CI
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Docker login
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_URL }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      # Builds the function app
+      - name: docker build
+        run: |
+          docker build src -f src/Sepes.Functions/Dockerfile -t ${{ env.ciTag }}:latest
+          docker push ${{ env.ciTag }}
+          # removed  -t ${{ env.ciTag }}:$GITHUB_RUN_ID
