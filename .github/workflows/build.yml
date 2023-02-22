@@ -32,6 +32,6 @@ jobs:
       # Builds the function app
       - name: docker build
         run: |
-          docker build src -f Asaqc/Asaqc.FuncApp/Dockerfile -t ${{ env.ciTag }}:latest
+          docker build Asaqc -f Asaqc/Asaqc.FuncApp/Dockerfile -t ${{ env.ciTag }}:latest
           docker push ${{ env.ciTag }}
           # removed  -t ${{ env.ciTag }}:$GITHUB_RUN_ID
