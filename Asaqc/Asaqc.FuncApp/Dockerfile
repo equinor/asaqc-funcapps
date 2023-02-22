@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 # WORKDIR /Asaqc
 
 COPY Asaqc.FuncApp /Asaqc/Asaqc.FuncApp
-RUN cd /src && \
+RUN cd /Asaqc && \
     ls
 RUN cd /Asaqc/Asaqc.FuncApp && \
     mkdir -p /home/site/wwwroot && \
